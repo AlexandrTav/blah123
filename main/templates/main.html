@@ -1,0 +1,117 @@
+<HTML>
+<head>
+    <title>What To Wearther</title>
+    <style>
+        /* image size 210x45 */
+        #cloth1 {
+            width: 200px;
+            height: 200px;
+        }
+        #cloth2 {
+            width: 200px;
+            height: 200px;
+        }
+        #cloth3 {
+            width: 200px;
+            height: 200px;
+        }
+        p {
+            font-size: 20px
+        }
+    </style>
+
+</head>
+
+<body>
+<h1>Weather Info</h1>
+
+<table>
+    <tr>
+        <td>
+            <form action="/" method="post">
+                <label for="city">Enter City</label>
+                <input type="text" id="city" name="txt_city"/>
+                <input type="submit" name="button_search" value="Search"/>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <form action="/">
+                <input type="submit" name="btn_refresh" value="Refresh Weather" style="float: left"/>
+            </form>
+        </td>
+        <td>
+            <a href="history" style="float: right">Show History</a>
+        </td>
+    </tr>
+</table>
+
+
+<h2><b>{{ data.location.name }}</b>: <i>{{ data.current.temp_c }} °C</i></h2>
+<h3>Condition: {{ data.current.condition.text }} <style>
+        #stav {
+             width:200px;
+             height: 200px;
+        }
+    </style></h3>
+
+<h2>RECOMMENDED OUTFIT:</h2>
+
+<div>
+
+    {% if data.current.temp_c < 0 %}
+         <img src = "static/coat.jpg" id= "cloth1">
+         <img src = "static/hat.jpg" id="cloth2">
+
+    {% elif data.current.temp_c >= 0 and data.current.temp_c < 10 %}
+         <img src = "static/jacket.jpg" id= "cloth1">
+         <img src = "static/cap.jpg" id="cloth2">
+
+    {% elif data.current.temp_c >= 10 and data.current.temp_c <= 20 %}
+         <img src = "static/sweater.jpg" id= "cloth1">
+         <img src = "static/pants.jpg" id="cloth2">
+
+    {% else %}
+         <img src = "static/tshirt.jpg" id= "cloth1">
+         <img src = "static/shorts.jpg" id="cloth2">
+    {% endif %}
+
+   {% if data.current.condition.code in [1180, 1183, 1186, 1189, 1192, 1195, 1198, 1201,- 1204, 1207, 1237] %}
+         <img src = "static/umb.jpg" id= "cloth3">
+
+    {% elif data.current.condition.code in [1000] %}
+         <img src = "static/gla.jpg" id= "cloth3">
+
+    {% elif data.current.condition.code in [1210, 1213, 1216, 1219, 1222, 1225, 1255, 1258, 1261, 1264] %}
+         <img src = "static/ski.jpg" id= "cloth3">
+   {% endif %}
+
+    {% if data.current.condition.code in [1000] %}
+         <img src = "static/sun.jpg" id= "stav">
+
+    {% elif data.current.condition.code in [1003] %}
+         <img src = "static/suncld.jpg" id= "stav">
+
+    {% elif data.current.condition.code in [1006, 1009] %}
+         <img src = "static/clds.jpg" id= "stav">
+
+    {% elif data.current.condition.code in [1180, 1183, 1186, 1189, 1192, 1195, 1198, 1201,- 1204, 1207, 1237] %}
+         <img src = "static/rain.jpg" id= "stav">
+
+    {% elif data.current.condition.code in [1210, 1213, 1216, 1219, 1222, 1225, 1255, 1258, 1261, 1264] %}
+         <img src = "static/snow.jpg" id= "stav">
+
+    {% elif data.current.condition.code in [1087, 1273, 1276, 1279, 1282] %}
+         <img src = "static/storm.jpg" id= "stav">
+
+    {% elif data.current.condition.code in [1135, 1147] %}
+         <img src = "static/fog.jpg" id= "stav">
+
+    {% endif %}
+</div>
+
+<p>Artist: VAT</p>
+
+</body>
+</HTML>

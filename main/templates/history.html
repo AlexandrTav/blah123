@@ -1,0 +1,13 @@
+<HTML>
+<head>
+    <title>History page</title>
+</head>
+<body>
+    <h1>History</h1>
+    <a href="/" style="float: right">Show main</a>
+    {% set dataList = data.split("\n") %}
+    {% for item in dataList %}
+        <p>{{ item }}</p>
+    {% endfor %}
+</body>
+</HTML>
